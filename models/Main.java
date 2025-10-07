@@ -1,8 +1,6 @@
 package models;
 import interfaces.Truckable;
-import repository.CarRepository2;
 import repository.CarRepositoryImport;
-import repository.CarRepositoryImport2;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,7 +23,7 @@ public class Main {
 
         System.out.println("-----------------------------------------------");
 
-        CarRepositoryImport2 rep = new CarRepositoryImport2();
+        CarRepositoryImport rep = new CarRepositoryImport();
         rep.save(sedan_0);
         System.out.println(rep.count());
         

@@ -1,16 +1,14 @@
 package repository;
 
-import models.Car;
-import models.CarBrand;
-
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public interface CarRepository<T, ID> {
-    void addCar(Car car);
-    void delCar(int ind);
-    void getCar(String brand);
-    void getCars(CarBrand brands);
-    T Save(T entry);
+
+    T save(T entry);
     List<T> SaveAll(Collection<T> entities);
+    Optional<T> findById(ID id);
+    void deleteByID(ID id);
+    void deleteAll();
+    long count();
+    boolean existById(ID id);
 }

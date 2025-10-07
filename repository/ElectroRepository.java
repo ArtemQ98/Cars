@@ -4,7 +4,7 @@ import models.ElectroCar;
 
 import java.util.*;
 
-public class ElectroRepository implements CarRepository2<ElectroCar, Integer>{
+public class ElectroRepository implements CarRepository<ElectroCar, Integer> {
 
     private Map<Integer, ElectroCar> cars = new HashMap<>();
     private static int Id = 0;
