@@ -23,7 +23,6 @@ public class Main {
         Truckable electroTruckInterface = new ElectroTruck(2021, 400, "TeslaСybertruck ", 300, true, 100);
         electroTruckInterface.load();
 
-
         System.out.println("-----------------------------------------------");
 
         CarRepositoryImport2 rep = new CarRepositoryImport2();
