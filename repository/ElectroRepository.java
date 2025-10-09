@@ -6,25 +6,30 @@ import java.util.*;
 
 public class ElectroRepository implements CarRepository<ElectroCar, Integer> {
 
-    private Map<Integer, ElectroCar> cars = new HashMap<>();
-    private static int Id = 0;
+    private List<ElectroCar> cars = new LinkedList<ElectroCar>();
+    private int LastId = 0;
 
     @Override
-    public ElectroCar save(ElectroCar truck) {
-        if (truck == null){
+    public ElectroCar save(ElectroCar car) {
+        if (car == null){
             System.out.println("Ошибка, машина = NULL!");
             return null;
         }
-        cars.put(Id, truck);
-        System.out.println("Сохранили машину с ID: " + Id + ": " + truck.brand);
-        Id++;
-        return truck;
+        cars.add(car);
+        System.out.println("Сохранили машину: " + car.brand);
+        LastId++;
+        return car;
     }
 
     @Override
     public Optional<ElectroCar> findById(Integer id) {
+        if (id <= 0 && id > cars.size()){
+            System.out.println("Неверное значение id");
+            return null;
+        }
+        id-=1;
         if (cars.get(id) != null){
-            System.out.println("Нашли машину ID " + id + ": " + cars.get(id).brand);
+            System.out.println("Нашли машину: " + cars.get(id).brand);
         }
         else{
             System.out.println("Такой машины не найдено");
@@ -34,9 +39,14 @@ public class ElectroRepository implements CarRepository<ElectroCar, Integer> {
 
     @Override
     public void deleteByID(Integer id) {
+        if (id <= 0 && id > cars.size()){
+            System.out.println("Неверное значение id");
+            return;
+        }
+        id-=1;
         if (cars.get(id) != null){
             cars.remove(id);
-            System.out.println("Удалили машину с ID " + id + ": " + cars.get(id).brand);
+            System.out.println("Удалили машину: " + cars.get(id).brand);
         }
         else{
             System.out.println("Такой машины не найдено");
@@ -44,7 +54,7 @@ public class ElectroRepository implements CarRepository<ElectroCar, Integer> {
     }
 
     @Override
-    public List SaveAll(Collection entities) {
+    public List<ElectroCar> SaveAll(Collection<ElectroCar> entities) {
         List<ElectroCar> carsList = List.of();
         for (int i = 0; i < cars.size(); i++) {
             carsList.add(cars.get(i));
@@ -70,6 +80,6 @@ public class ElectroRepository implements CarRepository<ElectroCar, Integer> {
 
     @Override
     public boolean existById(Integer id) {
-        return cars.get(id) == null ? false : true;
+        return cars.get(id-1) == null ? false : true;
     }
 }

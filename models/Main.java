@@ -1,31 +1,25 @@
 package models;
 import interfaces.Truckable;
 import repository.CarRepositoryImport;
+import repository.ElectroRepository;
 
 public class Main {
     public static void main(String[] args) {
-        Sedan sedan_0 = new Sedan(2020, 300, "Порше ", 5000,false);
-        sedan_0.drive();
+        Sedan sedan1 = new Sedan(2020, 300, "Порше ", 5000,false);
+        sedan1.drive();
 
-        Truck truck = new Truck(2020, 300, "Volvo ", 5000, false);
-        truck.drive();
-        truck.stop();
 
-        ElectroCar electro = new ElectroCar(2020, 300, "Tesla ", 5000, true);
-        electro.stop();
-        electro.drive();
+        ElectroCar electro = new ElectroCar(2025, 574, "Tesla ", 5000, true);
 
-        Truckable TruckInterface = new Truck(2020, 300, "Volvo ", 450, false);
-        TruckInterface.load();
-
-        Truckable electroTruckInterface = new ElectroTruck(2021, 400, "TeslaСybertruck ", 300, true, 100);
-        electroTruckInterface.load();
 
         System.out.println("-----------------------------------------------");
 
         CarRepositoryImport rep = new CarRepositoryImport();
-        rep.save(sedan_0);
+        rep.save(sedan1);
+        rep.save(electro);
         System.out.println(rep.count());
-        
+        System.out.println(rep.existById(1));
+        rep.deleteByID(1);
+
     }
 }
